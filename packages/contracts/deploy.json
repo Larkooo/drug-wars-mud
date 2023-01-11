@@ -1,0 +1,23 @@
+{
+  "components": [
+    "BankComponent",
+    "CashComponent",
+    "CirculatingDrugsComponent",
+    "DebtComponent",
+    "DrugPrototypeComponent",
+    "DrugsStorageComponent",
+    "GunsComponent",
+    "LocationComponent",
+    "LocationPrototypeComponent"
+  ],
+  "systems": [
+    { "name": "BuySystem", "writeAccess": ["CashComponent, DrugsStorageComponent", "CirculatingDrugsComponent"] },
+    { "name": "SellSystem", "writeAccess": ["CashComponent, DrugsStorageComponent", "CirculatingDrugsComponent"] },
+    { "name": "TravelSystem", "writeAccess": ["LocationComponent, DrugsStorageComponent", "CirculatingDrugsComponent"] },
+    {
+      "name": "InitSystem",
+      "writeAccess": ["DrugPrototypeComponent", "LocationPrototypeComponent"],
+      "initialize": "new bytes(0)"
+    }
+  ]
+}
