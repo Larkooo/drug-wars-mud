@@ -1,7 +1,7 @@
 pragma solidity >=0.8.0;
 import "std-contracts/components/Uint32Component.sol";
 
-uint256 constant ID = uint256(keccak256("component.Cash"));
+uint256 constant ID = uint256(keccak256("component.Debt"));
 
 // Amount of debt player has
 contract DebtComponent is Uint32Component {

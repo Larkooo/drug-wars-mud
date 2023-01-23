@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
-import "std-contracts/components/BoolBareComponent.sol";
+import "std-contracts/components/BoolComponent.sol";
 
-uint256 constant ID = uint256(keccak256("component.LocationPrototype"));
+uint256 constant ID = uint256(keccak256("component.LocationRegistry"));
 
 // Registry for in game locations
-contract LocationRegistryComponent is BoolBareComponent {
-  constructor(address world) BoolBareComponent(world, ID) {}
+contract LocationRegistryComponent is BoolComponent {
+  constructor(address world) BoolComponent(world, ID) {}
 }

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
-import "solecs/BareComponent.sol";
+import "solecs/Component.sol";
 import { Set } from "solecs/Set.sol";
 
 uint256 constant ID = uint256(keccak256("component.StoredDrugs"));
@@ -11,8 +11,8 @@ struct StoredDrug {
 }
 
 // Represents a stash of drugs
-contract DrugsStorageComponent is BareComponent {
-  constructor(address world, uint256 id) BareComponent(world, id) {}
+abstract contract DrugsStorageComponent is Component {
+  constructor(address world, uint256 id) Component(world, id) {}
 
   function getSchema() public pure override returns (string[] memory keys, LibTypes.SchemaValue[] memory values) {
     keys = new string[](2);

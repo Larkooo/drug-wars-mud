@@ -14,10 +14,10 @@ contract InitSystem is System {
   constructor(IWorld _world, address _components) System(_world, _components) {}
 
   function execute(bytes memory) public returns (bytes memory) {
-    DrugPrototypeComponent drugRegistryComponent = DrugRegistryComponent(getAddressById(components, DrugRegistryComponentID));
-    LocationPrototypeComponent locationRegistryComponent = LocationRegistryComponent(getAddressById(components, LocationRegistryComponentID));
+    DrugRegistryComponent drugRegistryComponent = DrugRegistryComponent(getAddressById(components, DrugRegistryComponentID));
+    LocationRegistryComponent locationRegistryComponent = LocationRegistryComponent(getAddressById(components, LocationRegistryComponentID));
 
-    defineLocations(drugRegistryComponent);
-    defineDrugs(locationRegistryComponent);
+    defineLocations(locationRegistryComponent);
+    defineDrugs(drugRegistryComponent);
   }
 }

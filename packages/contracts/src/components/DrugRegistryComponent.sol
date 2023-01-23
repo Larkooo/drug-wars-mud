@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
-import "std-contracts/components/BoolBareComponent.sol";
+import "solecs/Component.sol";
 
-uint256 constant ID = uint256(keccak256("component.DrugPrototype"));
+uint256 constant ID = uint256(keccak256("component.DrugRegistry"));
 
 struct Drug {
   string name;
@@ -12,8 +12,8 @@ struct Drug {
 }
 
 // Registry for in game drugs
-contract DrugRegistryComponent is BareComponent {
-  constructor(address world) BareComponent(world, ID) {}
+contract DrugRegistryComponent is Component {
+  constructor(address world) Component(world, ID) {}
 
   function getSchema() public pure override returns (string[] memory keys, LibTypes.SchemaValue[] memory values) {
     keys = new string[](2);
