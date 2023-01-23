@@ -7,7 +7,12 @@ import { LocationComponent, ID as LocationComponentID } from "../components/Loca
 import { LocationRegistryComponent, ID as LocationRegistryComponentID } from "../components/LocationRegistryComponent.sol";
 import { CirculatingDrugsComponent, ID as CirculatingDrugsComponentID } from "../components/CirculatingDrugsComponent.sol";
 import { OwnedDrugsComponent, ID as OwnedDrugsComponentID } from "../components/OwnedDrugsComponent.sol";
+import { CashComponent, ID as CashComponentID } from "../components/CashComponent.sol";
+import { BankComponent, ID as BankComponentID } from "../components/BankComponent.sol";
+import { CirculatingMoneyComponent, ID as CirculatingMoneyComponentID } from "../components/CirculatingMoneyComponent.sol";
 import { StoredDrug } from "../components/DrugsStorageComponent.sol";
+import { handleSpawn } from "../handlers/Spawn.sol";
+
 
 uint256 constant ID = uint256(keccak256("system.Travel"));
 
@@ -19,6 +24,9 @@ contract TravelSystem is System {
     LocationRegistryComponent locationRegistryComponent = LocationRegistryComponent(getAddressById(components, LocationRegistryComponentID));
     CirculatingDrugsComponent circulatingDrugsComponent = CirculatingDrugsComponent(getAddressById(components, CirculatingDrugsComponentID));
     OwnedDrugsComponent ownedDrugsComponent = OwnedDrugsComponent(getAddressById(components, OwnedDrugsComponentID));
+    CashComponent cashComponent = CashComponent(getAddressById(components, CashComponentID));
+    BankComponent bankComponent = BankComponent(getAddressById(components, BankComponentID));
+    CirculatingMoneyComponent circulatingMoneyComponent = CirculatingMoneyComponent(getAddressById(components, CirculatingMoneyComponentID));
 
     uint256 location = abi.decode(arguments, (uint256));
     uint256 currentLocation = locationComponent.getValue(addressToEntity(msg.sender));
@@ -27,6 +35,12 @@ contract TravelSystem is System {
     require(currentLocation != location, "Cannot travel to same location");
     // check if location exists
     require(locationRegistryComponent.getValue(location), "Location does not exist");
+
+    // if current location is 0, then it is the first travel
+    // give 1000$ cash to player and 5k in bank
+    if (currentLocation == 0) {
+      handleSpawn(cashComponent, bankComponent, circulatingMoneyComponent);
+    }
 
     // update circulating drugs
     StoredDrug[] memory drugs = ownedDrugsComponent.getValue(addressToEntity(msg.sender));

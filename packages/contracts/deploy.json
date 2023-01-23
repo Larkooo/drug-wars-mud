@@ -8,12 +8,13 @@
     "GunsComponent",
     "LocationComponent",
     "LocationRegistryComponent",
-    "OwnedDrugsComponent"
+    "OwnedDrugsComponent",
+    "CirculatingMoneyComponent"
   ],
   "systems": [
     { "name": "BuySystem", "writeAccess": ["CashComponent", "CirculatingDrugsComponent", "OwnedDrugsComponent"] },
     { "name": "SellSystem", "writeAccess": ["CashComponent", "CirculatingDrugsComponent", "OwnedDrugsComponent"] },
-    { "name": "TravelSystem", "writeAccess": ["LocationComponent", "CirculatingDrugsComponent"] },
+    { "name": "TravelSystem", "writeAccess": ["CashComponent", "BankComponent", "LocationComponent", "CirculatingDrugsComponent", "CirculatingMoneyComponent"] },
     {
       "name": "InitSystem",
       "writeAccess": ["DrugRegistryComponent", "LocationRegistryComponent"],
